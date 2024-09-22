@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <style>
+        body{
+            background-color:honeydew;
+
+        } 
+     body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background-color: #333; color: white; padding: 10px; text-align: center; }
+        .container { padding: 20px; }
+        .video-player { text-align: center; }
+        .video-player iframe { width: 100%; max-width: 800px; height: 450px; }
+        .related-videos { margin-top: 20px; }
+        .related-videos img { width: 100px; height: 56px; }
+        footer { background-color: #333; color: white; padding: 10px; text-align: center; }
+    </style>
+   <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0;
+      
+
+    }
+      
+</style>
+
+</head>
+<body>
+   
+   
+    <!-- Google Translate Widget -->
+    <div id="google_translate_element"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'es'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'es'}, 'google_translate_element');
+        }
+    </script>
+    
+     <!-- Aquí termina el contenido principal de la página -->
+    
+
+    <div class="container">
+       
+        <div class="video-player">
+            <video width="640" height="360" controls>
+                <source src="video.mp4" type="video/mp4">
+               
+              
+              </video>
+            
+         </div>
+        <script>
+            // ... existing JavaScript code ...
+    
+            document.getElementById('commentSubmit').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+    
+                if (!videoWatched) {
+                    alert('Debes ver el video antes de comentar.');
+                    return;
+                }
+    
+                var commenterName = document.getElementById('commenterName').value;
+                var commenterLastName = document.getElementById('commenterLastName').value;
+                var commentText = document.getElementById('commentText').value;
+    
+                if (commenterName.trim() === '' || commenterLastName.trim() === '') {
+                    alert('Por favor, ingresa tu nombre y apellido.');
+                    return;
+                }
+    
+                if (commentText.trim() === '') {
+                    alert('Por favor, escribe un comentario.');
+                    return;
+                }
+    
+                var commentDiv = document.createElement('div');
+                commentDiv.className = 'comment';
+                commentDiv.innerHTML = `
+                    <p><strong>${escapeHtml(commenterName)} ${escapeHtml(commenterLastName)}:</strong> ${escapeHtml(commentText)}</p>
+                `;
+    
+                document.getElementById('commentsSection').appendChild(commentDiv);
+                document.getElementById('commenterName').value = '';
+                document.getElementById('commenterLastName').value = '';
+                document.getElementById('commentText').value = '';
+            });
+    
+            // ... existing JavaScript code ...
+        </script>
+    </body>
+    </html>
+    <script>
+        var player;
+        var videoWatched = false;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('videoPlayer', {
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.ENDED) {
+                videoWatched = true;
+                document.getElementById('commentSection').style.display = 'block';
+            }
+        }
+
+        document.getElementById('commentForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que se recargue la página
+
+            if (!videoWatched) {
+                alert('Debes ver el video antes de comentar.');
+                return;
+            }
+
+            var commentText = document.getElementById('commentText').value;
+            
+            if (commentText.trim() === '') {
+                alert('Por favor, escribe un comentario.');
+                return;
+            }
+
+            var commentDiv = document.createElement('div');
+            commentDiv.className = 'comment';
+            commentDiv.innerHTML = '<p><strong>Usuario:</strong> ' + escapeHtml(commentText) + '</p>';
+            
+            document.getElementById('commentsSection').appendChild(commentDiv);
+            document.getElementById('commentText').value = '';
+        });
+
+        function escapeHtml(text) {
+            var map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+
+        // Cargar la API de YouTube
+        var tag = document.createElement('script');
+        tag.src = "";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario y Tabla</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .delete-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="dataForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
+        
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" required>
+        
+        <label for="pais">País:</label>
+        <input type="text" id="pais" required>
+        
+        <label for="comentario">Comentario:</label>
+        <textarea id="comentario" required></textarea>
+        
+        <button type="submit">Agregar</button>
+    </form>
+    
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>País</th>
+                <th>Comentario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas se agregarán aquí -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.getElementById('dataForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var nombre = document.getElementById('nombre').value.trim();
+        var apellido = document.getElementById('apellido').value.trim();
+        var pais = document.getElementById('pais').value.trim();
+        var comentario = document.getElementById('comentario').value.trim();
+        
+        if (!nombre || !apellido || !pais || !comentario) {
+            alert('Por favor, llena todos los campos.');
+            return;
+        }
+
+        // Crear una nueva fila para la tabla
+        var tabla = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+        var fila = document.createElement('tr');
+        fila.innerHTML = '<td>' + escapeHtml(nombre) + '</td>' +
+                         '<td>' + escapeHtml(apellido) + '</td>' +
+                         '<td>' + escapeHtml(pais) + '</td>' +
+                         '<td>' + escapeHtml(comentario) + '</td>';
+        
+        // Agregar la fila a la tabla
+        tabla.appendChild(fila);
+
+        // Guardar en localStorage
+        saveToLocalStorage(nombre, apellido, pais, comentario);
+        document.getElementById('dataForm').reset();
+    });
+
+    function saveToLocalStorage(nombre, apellido, pais, comentario) {
+        let comments = JSON.parse(localStorage.getItem('comments')) || [];
+        comments.push({ nombre, apellido, pais, comentario });
+        localStorage.setItem('comments', JSON.stringify(comments));
+    }
+
+    function loadFromLocalStorage() {
+        let comments = JSON.parse(localStorage.getItem('comments')) || [];
+        comments.forEach(comment => {
+            var tabla = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+            var fila = document.createElement('tr');
+            fila.innerHTML = '<td>' + escapeHtml(comment.nombre) + '</td>' +
+                             '<td>' + escapeHtml(comment.apellido) + '</td>' +
+                             '<td>' + escapeHtml(comment.pais) + '</td>' +
+                             '<td>' + escapeHtml(comment.comentario) + '</td>';
+            tabla.appendChild(fila);
+        });
+    }
+
+    function escapeHtml(text) {
+        var map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+    }
+
+    // Cargar los comentarios al iniciar la página
+    window.onload = loadFromLocalStorage;
+</script>
+
+
+        
+     
+
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Capturar los valores del formulario
+            var nombre = document.getElementById('nombre').value.trim();
+            var apellido = document.getElementById('apellido').value.trim();
+            var pais = document.getElementById('pais').value.trim();
+            var comentario = document.getElementById('comentario').value.trim();
+            
+            // Validar los campos
+            if (!nombre || !apellido || !pais || !comentario) {
+                alert('Por favor, llena todos los campos.');
+                return;
+            }
+            
+            // Crear una nueva fila para la tabla
+            var tabla = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+            var fila = document.createElement('tr');
+            
+            fila.innerHTML = '<td>' + escapeHtml(nombre) + '</td>' +
+                              '<td>' + escapeHtml(apellido) + '</td>' +
+                              '<td>' + escapeHtml(pais) + '</td>' +
+                              '<td>' + escapeHtml(comentario) + '</td>' +
+                              '<td><button class="delete-btn" onclick="eliminarFila(this)">Eliminar</button></td>';
+            
+            // Agregar la fila a la tabla
+            tabla.appendChild(fila);
+            
+            // Limpiar el formulario
+            document.getElementById('dataForm').reset();
+        });
+
+        function escapeHtml(text) {
+            var map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+
+        function eliminarFila(boton) {
+            var fila = boton.parentNode.parentNode;
+            fila.parentNode.removeChild(fila);
+        }
+    </script>
+</body>
+</html>
+
+
+
